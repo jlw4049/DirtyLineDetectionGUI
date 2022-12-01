@@ -1,0 +1,4 @@
+.idea/
+/cli_parser/build/
+/cli_parser/dist/
+*.spec
