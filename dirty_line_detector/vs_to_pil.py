@@ -1,7 +1,6 @@
+import numpy as np
 import vapoursynth as vs
 from PIL import Image
-import cv2
-import numpy as np
 
 core = vs.core
 
@@ -15,9 +14,11 @@ try:
 except vs.Error:
     pass
 
-
 # source_file = core.lsmas.LWLibavSource(r"C:\Users\jlw_4\Desktop\rugrats test\The.Rugrats.Movie.1998.1080p.BluRay.REMUX.AVC.TrueHD.5.1.mkv")
-source_file = core.ffms2.Source(r"\\JLW-UNRAID\dl_share\downloads\FUTURAMA_MOVIE\Futurama.Bender's.Big.Score.2007.NTSC.DVD.Remux.DD.5.1.SacReD\Futurama.Bender's.Big.Score.2007.NTSC.DVD.Remux.DD.5.1.SacReD.mkv")
+source_file = core.ffms2.Source(
+    r"\\JLW-UNRAID\dl_share\downloads\FUTURAMA_MOVIE\Futurama.Bender's.Big.Score.2007.NTSC.DVD.Remux.DD.5.1.SacReD\Futurama.Bender's.Big.Score.2007.NTSC.DVD.Remux.DD.5.1.SacReD.mkv")
+
+
 # source_file = source_file.resize.Spline16(format=vs.RGB24, matrix_in_s="470bg")
 #
 # VS_DTYPE_MAP = {
@@ -81,7 +82,6 @@ source_file = core.ffms2.Source(r"\\JLW-UNRAID\dl_share\downloads\FUTURAMA_MOVIE
 # frame_array = frame_to_array(source_file.get_frame(123))
 # print(frame_array)
 # new_img = Image.fromarray(frame_array, "P").save(r"C:\Users\jlw_4\Desktop\test\testting.png")
-import cv2
 # import numpy as np
 #
 # clip = core.lsmas.LWLibavSource(r"C:\Users\jlw_4\Desktop\rugrats test\The.Rugrats.Movie.1998.1080p.BluRay.REMUX.AVC.TrueHD.5.1.mkv")
@@ -120,10 +120,10 @@ def frame_to_pil_via_numpy(f: vs.VideoFrame) -> Image:
         np.asarray(f[p])
         for p in range(f.format.num_planes)
     ])
-    image = Image.fromarray(array, "RGB")
+    image = Image.fromarray(array)
     return image
 
 
 frame = source_file
-frame = frame.resize.Point(format=vs.RGB24, matrix_in_s = '709').get_frame(15000)
-frame_to_pil_via_numpy(frame).save(r"C:\Users\jlw_4\Desktop\test\testting2.png")
+frame = frame.resize.Spline36(format=vs.RGB24, matrix_in_s='709').get_frame(15000)
+frame_to_pil_via_numpy(frame).save(r"C:\Users\jlw_4\Desktop\test\testting4.png")
